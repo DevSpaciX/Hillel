@@ -1,4 +1,8 @@
 def parse_cookie(query: str) -> dict:
+    if len(query) > 1:
+        query = query.split(';')
+        dictionary = dict([parse.split('=', 1) for parse in query if parse])
+        return dictionary
     return {}
 
 
