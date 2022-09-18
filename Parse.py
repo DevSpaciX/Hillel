@@ -1,19 +1,7 @@
-import re
-
-
 def parse(query: str) -> dict:
-    if re.search('name=ferret&color=purple', query):
-        str_parse = re.search('name=ferret&color=purple', query)
-        str_parse = re.sub('&', '=', str_parse[0])
-        str_parse = str_parse.split('=')
-        result_dict = {str_parse[0]: str_parse[1], str_parse[2]: str_parse[3]}
-        return result_dict
-    if re.search('name=Dima', query):
-        str_parse = re.search('name=Dima', query)
-        str_parse = str_parse[0].split('=')
-        result_dict = {str_parse[0]: str_parse[1]}
-        return result_dict
-    else:
+        query = query.split('?', 1)
+        if len(query) > 1:
+            return dict([x.split('=') for x in query[1].split('&') if '=' in x])
         return {}
 
 if __name__ == '__main__':
